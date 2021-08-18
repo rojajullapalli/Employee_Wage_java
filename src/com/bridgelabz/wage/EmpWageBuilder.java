@@ -1,4 +1,7 @@
 package com.bridgelabz.wage;
+
+import java.util.Scanner;
+
 /**
  *EmpWageBuildweUC1 is an application to check whether Employee is fulltime or absent or partime using case statement.
  * Based upon Employee is fulltime,absent,parttime then it will calculate the wage of the employee for day.
@@ -9,32 +12,29 @@ package com.bridgelabz.wage;
  * @since :15-08-2021
  **/
 public class EmpWageBuilder {
-    public static final int IS_FULL_TIME = 1;
-    public static final int IS_PART_TIME = 2;
-    public static final int empRatePerHr = 20;
-    public static final int NUM_OF_WORKING_DAYS = 20;
-    public static final int Num_OF_WORKING_HOURS = 100;
-    public static int empwage;
-    public static String ispresent(){
+    public static final int IS_PART_TIME = 1;//constant to check employee is full time
+    public static final int IS_FULL_TIME = 2;//constant to check employee is part time
+
+    public static String isPresent(){
         int empCheck = (int) Math.floor(Math.random() * 10) % 3;
         switch(empCheck) {
             case IS_FULL_TIME:
-                System.out.println("Employee is fulltime present");
                 return "present";
             case IS_PART_TIME:
-                System.out.println("Employee is parttime");
                 return "parttime";
             default:
-                System.out.println("Employee is absent");
                 return "absent";
         }
     }
-    public static void dailywage(){
+
+    public static int dailywage(int empRatePerHr, int numOfWorkingDays, int NumOfWorkingHours){
         int totalworkingdays=1;
         int totalworkinghours=0;
         int empHrs=0;
-        while(totalworkingdays<=NUM_OF_WORKING_DAYS && totalworkinghours<=Num_OF_WORKING_HOURS) {
-            String check = ispresent();
+        int totalempwage=0;
+        int empwage;
+        while(totalworkingdays<=numOfWorkingDays && totalworkinghours<=NumOfWorkingHours) {
+            String check = isPresent();
             if (check == "present")
                 empHrs = 8;
             else if (check == "parttime")
@@ -42,15 +42,46 @@ public class EmpWageBuilder {
             else
                 empHrs = 0;
             empwage = empHrs * empRatePerHr;
+            totalempwage+=empwage;
             totalworkinghours+=empHrs;
             System.out.println("employee wage for day " + totalworkingdays + " is " + empwage);
             totalworkingdays++;
         }
+        System.out.println("total employee wage "+totalempwage);
         System.out.println("total working hours " +totalworkinghours);
+        return totalworkingdays;
+    }
+
+    public static void getInput(){
+        Scanner sc=new Scanner(System.in);
+        CompanyDetails company1 = new CompanyDetails();
+        System.out.println("enter the values for employee rate per hour");
+        company1.setEmpRatePerHr(sc.nextInt());
+        System.out.println("enter number of woring days");
+        company1.setNumOfWorkingDays(sc.nextInt());
+        System.out.println("enter number of working hours");
+        company1.setNumOfWorkingHours(sc.nextInt());
+        System.out.println("enter the above details for company1");
+        System.out.println("emp rate/hr = " +company1.getEmpRatePerHr()+" number of working days = " +company1.getNumOfWorkingDays()+"number of working hours "+company1.getNumOfWorkingHours());
+
+        CompanyDetails company2 = new CompanyDetails();
+        System.out.println("enter the above details for company2");
+        System.out.println("enter the values for employee rate per hour");
+        company2.setEmpRatePerHr(sc.nextInt());
+        System.out.println("enter number of woring days");
+        company2.setNumOfWorkingDays(sc.nextInt());
+        System.out.println("enter number of working hours");
+        company2.setNumOfWorkingHours(sc.nextInt());
+        System.out.println("emp rate/hr = " +company2.getEmpRatePerHr()+" number of working days = " +company2.getNumOfWorkingDays()+"number of working hours "+company2.getNumOfWorkingHours());
+
+        System.out.println("employee wage for company1 is");
+        dailywage(company1.getEmpRatePerHr(), company1.getNumOfWorkingDays(), company1.getNumOfWorkingHours());
+        System.out.println("employee wage for company2 is");
+        dailywage(company2.getEmpRatePerHr(), company2.getNumOfWorkingDays(), company2.getNumOfWorkingHours());
+
     }
 
     public static void main(String[] args) {
-        dailywage();
+        getInput();
     }
-
 }
