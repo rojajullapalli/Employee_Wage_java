@@ -62,7 +62,7 @@ public class EmpWageBuilder {
         System.out.println("enter number of working hours");
         company1.setNumOfWorkingHours(sc.nextInt());
         System.out.println("enter the above details for company1");
-        System.out.println("emp rate/hr = " +company1.getEmpRatePerHr()+" number of working days = " +company1.getNumOfWorkingDays()+"number of working hours "+company1.getNumOfWorkingHours());
+        System.out.println("emp rate/hr = " +company1.getEmpRatePerHr()+ " number of working days = " +company1.getNumOfWorkingDays()+ "number of working hours " +company1.getNumOfWorkingHours());
 
         CompanyDetails company2 = new CompanyDetails();
         System.out.println("enter the above details for company2");
@@ -72,7 +72,7 @@ public class EmpWageBuilder {
         company2.setNumOfWorkingDays(sc.nextInt());
         System.out.println("enter number of working hours");
         company2.setNumOfWorkingHours(sc.nextInt());
-        System.out.println("emp rate/hr = " +company2.getEmpRatePerHr()+" number of working days = " +company2.getNumOfWorkingDays()+"number of working hours "+company2.getNumOfWorkingHours());
+        System.out.println("emp rate/hr = " +company2.getEmpRatePerHr()+" number of working days = " +company2.getNumOfWorkingDays()+ "number of working hours " +company2.getNumOfWorkingHours());
 
         System.out.println("employee wage for company1 is");
         dailywage(company1.getEmpRatePerHr(), company1.getNumOfWorkingDays(), company1.getNumOfWorkingHours());
@@ -81,7 +81,5 @@ public class EmpWageBuilder {
 
     }
 
-    public static void main(String[] args) {
-        getInput();
-    }
+    public static void main(String[] args) { getInput(); }
 }
