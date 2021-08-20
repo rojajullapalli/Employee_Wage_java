@@ -15,20 +15,7 @@ import java.util.Scanner;
 public class EmpWageBuilder {
         public static final int IS_PART_TIME = 1;
         public static final int IS_FULL_TIME = 2;
-        private String companyName;
-        private int empRatePerHr;
-        private int numOfWorkingDays;
-        private int numOfWorkingHours;
 
-
-        public EmpWageBuilder(String companyName, int empRatePerHr, int numOfWorkingDays, int numOfWorkingHours) {
-            this.companyName = companyName;
-            this.empRatePerHr = empRatePerHr;
-            this.numOfWorkingDays = numOfWorkingDays;
-            this.numOfWorkingHours = numOfWorkingHours;
-
-        }
-        
 
     public static String isPresent(){
         int empCheck = (int) Math.floor(Math.random() * 10) % 3;
@@ -42,13 +29,12 @@ public class EmpWageBuilder {
         }
     }
 
-    public int dailywage() {
+    public static int dailywage(CompanyDetails employee) {
         int totalworkingdays = 1;
         int totalworkinghours = 0;
         int empHrs = 0;
-        int totalempwage = 0;
-        int empwage;
-        while (totalworkingdays <= numOfWorkingDays && totalworkinghours <= numOfWorkingHours) {
+        int totalEmpHrs=0;
+        while (totalworkingdays <= employee.getNumOfWorkingDays() && totalworkinghours <= employee.getNumOfWorkingHours()) {
             String check = isPresent();
             if (check == "present")
                 empHrs = 8;
@@ -56,24 +42,24 @@ public class EmpWageBuilder {
                 empHrs = 4;
             else
                 empHrs = 0;
-            empwage = empHrs * empRatePerHr;
-            totalempwage += empwage;
+            totalEmpHrs += empHrs;
             totalworkinghours += empHrs;
-            System.out.println("employee wage for day " + totalworkingdays + " is " + empwage);
+            System.out.println("employee wage for day " + totalworkingdays + "working hours is " + empHrs);
             totalworkingdays++;
         }
-        System.out.println("total employee wage " + totalempwage);
-        System.out.println("total working hours " + totalworkinghours);
-        System.out.println("Total Wage of " + companyName + " Employee is " + totalempwage);
+        employee.setTotalEmpWage( totalEmpHrs * employee.getEmpRatePerHr() );
+        System.out.println("total working hours " + totalEmpHrs);
+        System.out.println("Total Wage of " + employee.getCompanyName() + " Employee is " + employee.getTotalEmpWage());
         return totalworkingdays;
     }
 
     public static void getInput(){
-        Scanner sc=new Scanner(System.in);
-        EmpWageBuilder bridgelabz=new EmpWageBuilder("bridgelabz",20,20,60);
-        EmpWageBuilder infosys=new EmpWageBuilder("infosys",30,28,120);
-        bridgelabz.dailywage();
-        infosys.dailywage();
+        EmpWageBuilder wage=new EmpWageBuilder();
+       CompanyDetails[] company=new CompanyDetails[2];
+        company[0]=new CompanyDetails("bridgelabz",20,20,20);
+        company[1]=new CompanyDetails("infosys",30,25,60);
+        EmpWageBuilder.dailywage(company[0]);
+        EmpWageBuilder.dailywage(company[1]);
 
     }
 
