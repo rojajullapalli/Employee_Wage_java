@@ -1,7 +1,10 @@
 package com.bridgelabz.wage;
 
+import java.util.ArrayList;
+
 public class EmployeeMain implements employee {
 
+    ArrayList<Integer> employeeDailyWage = new ArrayList<Integer>();
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
     public static String isPresent(){
@@ -21,7 +24,8 @@ public class EmployeeMain implements employee {
         int totalworkinghours = 0;
         int empHrs = 0;
         int totalEmpHrs = 0;
-        while (totalworkingdays <= employee.getNumOfWorkingDays() && totalworkinghours <= employee.getNumOfWorkingHours()) {
+        int empDailyWage=0;
+        while (totalworkingdays < employee.getNumOfWorkingDays() && totalworkinghours < employee.getNumOfWorkingHours()) {
             String check = isPresent();
             if (check == "present")
                 empHrs = 8;
@@ -31,7 +35,10 @@ public class EmployeeMain implements employee {
                 empHrs = 0;
             totalEmpHrs += empHrs;
             totalworkinghours += empHrs;
-            System.out.println("employee wage for day " + totalworkingdays + "working hours is " + empHrs);
+            empDailyWage = empHrs * employee.getEmpRatePerHr();
+            System.out.println("Daily Wage for "+employee.getCompanyName()+" is "+empDailyWage);
+            employeeDailyWage.add( empDailyWage );
+            System.out.println("employee wage " +employee.getCompanyName()+" for day " + totalworkingdays + "working hours is " + empHrs);
             totalworkingdays++;
         }
         employee.setTotalEmpWage(totalEmpHrs * employee.getEmpRatePerHr());
