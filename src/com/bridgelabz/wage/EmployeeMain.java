@@ -36,13 +36,9 @@ public class EmployeeMain implements employee {
             totalEmpHrs += empHrs;
             totalworkinghours += empHrs;
             empDailyWage = empHrs * employee.getEmpRatePerHr();
-            System.out.println("Daily Wage for "+employee.getCompanyName()+" is "+empDailyWage);
             employeeDailyWage.add( empDailyWage );
-            System.out.println("employee wage " +employee.getCompanyName()+" for day " + totalworkingdays + "working hours is " + empHrs);
             totalworkingdays++;
         }
         employee.setTotalEmpWage(totalEmpHrs * employee.getEmpRatePerHr());
-        System.out.println("total working hours " + totalEmpHrs);
-        System.out.println("Total Wage of " + employee.getCompanyName() + " Employee is " + employee.getTotalEmpWage());
     }
 }
